@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% load custom_filters %} {% block content %}
+<div class="bg-white p-8 rounded-md shadow-md mb-6">
+  <!-- Title -->
+  <h2 class="text-2xl font-bold mb-6">Edit Post</h2>
+  <form method="POST" action="{% url 'edit_post' post.id %}" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.media }}
+
+    <!-- Post Title -->
+    <div class="mb-4">
+      <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Post Title</label>
+      {{ form.title|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Author Name -->
+    <div class="mb-4">
+      <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author Name</label>
+      {{ form.author|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Post Category -->
+    <div class="mb-4">
+      <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Post Category</label>
+      {{ form.category|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Post Body -->
+    <div class="mb-4">
+      <label for="body" class="block text-gray-700 text-sm font-bold mb-2">Post Body</label>
+      {{ form.body }}
+    </div>
+
+    <!-- Post Tags -->
+    <div class="mb-4">
+      <label for="tags" class="block text-gray-700 text-sm font-bold mb-2">Tags (comma-separated)</label>
+      {{ form.tags|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Image Upload -->
+    <div class="mb-4">
+      <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Upload Post Header Image</label>
+      {{ form.image|add_class:"w-full px-3 py-2 text-gray-600 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Meta Title -->
+    <div class="mb-4">
+      <label for="meta_title" class="block text-gray-700 text-sm font-bold mb-2">Meta Title</label>
+      {{ form.meta_title|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Meta Description -->
+    <div class="mb-4">
+      <label for="meta_description" class="block text-gray-700 text-sm font-bold mb-2">Meta Description</label>
+      {{ form.meta_description|add_class:"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Update Post
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

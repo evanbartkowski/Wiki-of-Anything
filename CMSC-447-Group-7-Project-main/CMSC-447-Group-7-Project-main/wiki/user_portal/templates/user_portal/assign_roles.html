@@ -1,0 +1,37 @@
+<!-- assign_roles.html -->
+{% extends 'base.html' %} {% block content %}
+<div class="bg-white p-8 rounded-md shadow-md mb-6">
+  <h2 class="text-2xl font-bold mb-6">Assign Roles</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <!-- Select User -->
+    <div class="mb-4">
+      <label for="user" class="block text-gray-700 text-sm font-bold mb-2">Select User</label>
+      <select name="user_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Select Role -->
+    <div class="mb-4">
+      <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Assign Role</label>
+      <select name="group" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        {% for group in groups %}
+        <option value="{{ group.name }}">{{ group.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Assign Role
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block title %}Login{% endblock %} {% load static %}
+
+<!-- Empty blocks to override header and footer -->
+{% block footer %}{% endblock %} {% block content %}
+<section class="relative py-16 bg-gray-50">
+  <div class="absolute top-0 left-0 w-full h-96 bg-indigo-500"></div>
+  <div class="relative container px-4 mx-auto">
+    <div class="max-w-xl mx-auto py-10 px-8 sm:px-20 bg-white rounded-md">
+      <div class="mb-6">
+        <span class="text-sm font-semibold uppercase">Sign in</span>
+        <h4 class="max-w-xs font-heading text-3xl sm:text-4xl mt-2">Welcome back</h4>
+      </div>
+
+      <!-- Display messages (success or error) -->
+      {% if messages %}
+      <div>
+        {% for message in messages %}
+        <div class="mb-4 {% if message.tags %} {{ message.tags }} {% endif %}">
+          <p class="text-red-500">{{ message }}</p>
+          <!-- Displays error message in red -->
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Sign In Form -->
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label class="block text-sm leading-6 mb-2" for="username">Username </label>
+          <input
+            class="block w-full p-4 font-heading text-gray-900 placeholder-gray-300 bg-gray-50 rounded outline-none"
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Type your username"
+            required
+          />
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm leading-6 mb-2" for="password">Password</label>
+          <input
+            class="block w-full p-4 font-heading text-gray-900 placeholder-gray-300 bg-gray-50 rounded outline-none"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Type password"
+            required
+          />
+        </div>
+        <div class="text-right mb-6">
+          <button
+            class="block w-full py-4 px-6 text-center font-heading font-medium text-base text-white hover:bg-indigo-600 border border-indigo-500 hover:border-indigo-600 rounded-sm transition duration-200 bg-indigo-500"
+            type="submit"
+          >
+            Sign in
+          </button>
+        </div>
+        <a class="block font-heading text-center hover:underline mb-6" href="{% url 'reset_password' %}">Forgot password</a>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

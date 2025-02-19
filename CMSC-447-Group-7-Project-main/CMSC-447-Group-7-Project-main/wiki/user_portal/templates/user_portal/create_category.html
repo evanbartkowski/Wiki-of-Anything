@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block vertical_nav %} {% include 'user_portal/vertical_nav.html' %} {% endblock %} {% block content %}
+<div class="bg-white p-8 rounded-md shadow-md mb-6">
+  <h2 class="text-2xl font-bold mb-6">Create Category</h2>
+  <form method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <div class="text-center mt-4">
+      <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Add Category
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

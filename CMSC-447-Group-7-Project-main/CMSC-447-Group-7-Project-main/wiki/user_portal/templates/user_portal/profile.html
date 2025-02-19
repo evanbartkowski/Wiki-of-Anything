@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="bg-white p-8 rounded-md shadow-md mb-6">
+  <h2 class="text-2xl font-bold mb-6">Profile</h2>
+
+  <div class="flex items-center mb-6">
+    <!-- Profile Picture -->
+    <img
+      src="{% if request.user.profile.profile_picture %}{{ request.user.profile.profile_picture.url }}{% else %}{% static 'images/default_profile_pic.png' %}{% endif %}"
+      alt="Profile Picture"
+      class="w-32 h-32 rounded-full object-cover"
+    />
+    <div class="ml-6">
+      <h3 class="text-xl font-bold">{{ request.user.username }}</h3>
+      <p class="text-gray-600">{{ request.user.get_full_name|default:"No Full Name" }}</p>
+      <p class="text-gray-600">Email: {{ request.user.email }}</p>
+      <p class="text-gray-600">Joined: {{ request.user.date_joined|date:"F j, Y" }}</p>
+      <p class="text-gray-600">Last Login: {{ request.user.last_login|date:"F j, Y, g:i a" }}</p>
+    </div>
+  </div>
+
+  <!-- Additional User Information Section -->
+  <div class="bg-gray-100 p-4 rounded-lg">
+    <h4 class="text-lg font-semibold mb-4">Additional Information</h4>
+    <p class="text-gray-700"><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+    <p class="text-gray-700"><strong>Location:</strong> {{ profile.location|default:"Location not specified" }}</p>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="mt-6">
+    <a href="{% url 'edit_profile' %}" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded">Edit Profile</a>
+  </div>
+</div>
+{% endblock %}

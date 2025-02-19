@@ -1,0 +1,19 @@
+/* custom_ckeditor.css */
+.django-ckeditor-widget,
+.cke_contents,
+.cke {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.cke_inner,
+.cke_reset {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.cke_editable {
+  width: 100% !important;
+  max-width: 100% !important;
+}

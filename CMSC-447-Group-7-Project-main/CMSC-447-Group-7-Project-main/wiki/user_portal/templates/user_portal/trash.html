@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+<div class="bg-white p-8 rounded-md shadow-md mb-6">
+  <h2 class="text-2xl font-bold mb-6">Trash</h2>
+
+  {% if deleted_posts %}
+  <!-- Batch Recovery Form -->
+  <form method="POST" action="{% url 'batch_recover' %}">
+    {% csrf_token %}
+    <table class="min-w-full bg-white">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 bg-gray-100">
+            <input type="checkbox" id="select-all" class="form-checkbox" />
+            <!-- Check all option -->
+          </th>
+          <th class="py-2 px-4 bg-gray-100">Title</th>
+          <th class="py-2 px-4 bg-gray-100">Author</th>
+          <th class="py-2 px-4 bg-gray-100">Deleted Date</th>
+          <th class="py-2 px-4 bg-gray-100">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in deleted_posts %}
+        <tr>
+          <td class="border px-4 py-2">
+            <input type="checkbox" name="post_ids" value="{{ post.id }}" class="form-checkbox" />
+          </td>
+          <td class="border px-4 py-2">{{ post.title }}</td>
+          <td class="border px-4 py-2">{{ post.author }}</td>
+          <td class="border px-4 py-2">{{ post.updated_at|date:"F j, Y, g:i a" }}</td>
+          <td class="border px-4 py-2">
+            <a href="{% url 'recover_post' post.id %}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Recover</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Submit button for batch recovery -->
+    <div class="mt-4">
+      <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Recover Selected</button>
+    </div>
+  </form>
+
+  <!-- JavaScript to select all checkboxes -->
+  <script>
+    document.getElementById("select-all").addEventListener("change", function (e) {
+      var checkboxes = document.querySelectorAll('input[name="post_ids"]');
+      checkboxes.forEach((checkbox) => (checkbox.checked = e.target.checked));
+    });
+  </script>
+  {% else %}
+  <p>No posts in Trash.</p>
+  {% endif %}
+</div>
+{% endblock %}
